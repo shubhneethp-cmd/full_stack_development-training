@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shubhneet Singh | UI/UX Designer & AI Web Specialist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6c63ff;
+      --secondary: #00c9a7;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --text: #334155;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h1 {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1200px;
+      margin: auto;
+      padding: 5rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-text h2 {
+      font-size: 2.8rem;
+      color: var(--dark);
+    }
+
+    .hero-text h2 span {
+      color: var(--primary);
+    }
+
+    .hero-text p {
+      margin: 1.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      border-radius: 30px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(108,99,255,0.3);
+    }
+
+    .hero-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .hero-card h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* Section */
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 4rem 2rem;
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 3rem;
+      color: var(--dark);
+    }
+
+    /* About */
+    .about p {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.07);
+      transition: transform 0.3s;
+    }
+
+    .skill:hover {
+      transform: translateY(-5px);
+    }
+
+    .skill h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Projects */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .project {
+      background: white;
+      padding: 2rem;
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.07);
+    }
+
+    .project h3 {
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Contact */
+    .contact {
+      text-align: center;
+    }
+
+    .contact p {
+      margin-bottom: 2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+
+    footer span {
+      color: var(--secondary);
+    }
+
+    @media (max-width: 600px) {
+      .hero-text h2 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <h1>Shubhneet</h1>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h2>Hi, I'm <span>Shubhneet Singh</span></h2>
+      <p>
+        A creative <strong>UI/UX Designer</strong> specializing in
+        modern <strong>Web</strong> and <strong>AI-driven</strong> experiences.
+        I design user-friendly, visually appealing, and high-impact digital products.
+      </p>
+      <a href="#contact" class="btn">Let's Work Together</a>
+    </div>
+    <div class="hero-card">
+      <h3>What I Do</h3>
+      <p>UI/UX Design</p>
+      <p>Web Design & Development</p>
+      <p>AI Product Interfaces</p>
+      <p>User Research & Prototyping</p>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <h2>About Me</h2>
+    <p>
+      I am a passionate UI/UX Designer focused on crafting clean, intuitive, and
+      engaging digital experiences. With a strong interest in AI-powered web
+      solutions, I bridge creativity and technology to build designs that users love
+      and businesses trust.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill">
+        <h3>HTML</h3>
+        <p>Learn Html</p>
+      </div>
+      <div class="skill">
+        <h3>CSS</h3>
+        <p>Testing</p>
+      </div>
+      <div class="skill">
+        <h3>Web Design</h3>
+        <p>HTML, CSS, Responsive Design</p>
+      </div>
+      <div class="skill">
+        <h3>AI Interfaces</h3>
+        <p>AI UX Patterns, Smart Dashboards</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project">
+        <h3>AI Portfolio Website</h3>
+        <p>A modern personal portfolio showcasing AI-focused UI/UX concepts.</p>
+      </div>
+      <div class="project">
+        <h3>Web App Dashboard</h3>
+        <p>Clean and user-friendly dashboard design for analytics platforms.</p>
+      </div>
+      <div class="project">
+        <h3>Ticket Booking UI</h3>
+        <p>End-to-end UI/UX for an online ticket booking system.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2>Contact Me</h2>
+    <p>Have a project in mind or want to collaborate?</p>
+    <a href="mailto:your@email.com" class="btn">Get In Touch</a>
+  </section>
+
+  <footer>
+    <p>© 2026 <span>Shubhneet Singh</span> | UI/UX Designer & AI Web Specialist</p>
+  </footer>
+
+</body>
+</html>

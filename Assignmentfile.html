@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 1</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/888/888879.png">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: orange;   /* Orange text */
+        }
+
+        /* Blue border */
+        table, th, td {
+            border: 2px solid blue;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        /* Background image of div */
+        .bg-div {
+            background-image: url("https://picsum.photos/400/200");
+            height: 200px;
+            color: white;
+            padding: 20px;
+            margin: 10px 0;
+        }
+
+        /* Keyframes animation (Bonus) */
+        .box {
+            width: 100px;
+            height: 100px;
+            background: blue;
+            animation: move 3s infinite;
+        }
+
+        @keyframes move {
+            from { margin-left: 0; }
+            to { margin-left: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- H1 & H2 -->
+    <h1>Assignment 1 Webpage</h1>
+    <h2>Basic HTML Elements</h2>
+
+    <!-- Image -->
+    <img src="https://picsum.photos/200" alt="Sample Image">
+
+    <!-- Paragraph -->
+    <p>This is a simple webpage created for assignment 1.</p>
+
+    <!-- Link -->
+    <a href="https://www.google.com" target="_blank">Visit Google</a>
+
+    <br><br>
+
+    <!-- Inline Images -->
+    <img src="https://picsum.photos/100" alt="Image 1">
+    <img src="https://picsum.photos/101" alt="Image 2">
+
+    <br><br>
+
+    <!-- Table -->
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+        <tr>
+            <td>Rahul</td>
+            <td>20</td>
+        </tr>
+    </table>
+
+    <br><br>
+
+    <!-- I-frame -->
+    <iframe width="300" height="200" src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+
+    <br><br>
+
+    <!-- Background image div -->
+    <div class="bg-div">
+        Background Image Div
+    </div>
+
+    <!-- Form Elements -->
+    <label>Gender:</label><br>
+    <input type="radio" name="gender"> Male
+    <input type="radio" name="gender"> Female
+
+    <br><br>
+
+    <label>Hobbies:</label><br>
+    <input type="checkbox"> Reading
+    <input type="checkbox"> Sports
+
+    <br><br>
+
+    <label>Date:</label>
+    <input type="date">
+
+    <br><br>
+
+    <label>Time:</label>
+    <input type="time">
+
+    <br><br>
+
+    <!-- Select -->
+    <select>
+        <option>Select Course</option>
+        <option>HTML</option>
+        <option>CSS</option>
+        <option>JavaScript</option>
+    </select>
+
+    <br><br>
+
+    <!-- Button -->
+    <button>Submit</button>
+
+    <br><br>
+
+    <!-- Keyframes Animation -->
+    <div class="box"></div>
+
+</body>
+</html>

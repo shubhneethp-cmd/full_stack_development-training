@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burger Menu UI</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: system-ui, Arial;
+}
+
+body{
+  background:#f7f3ef;
+}
+
+/* HEADER */
+.header{
+  padding:14px;
+  background:#fff;
+  font-weight:700;
+  font-size:18px;
+  border-bottom:1px solid #ddd;
+}
+
+/* LAYOUT */
+.wrapper{
+  display:flex;
+}
+
+/* CATEGORY BAR */
+.categories{
+  width:90px;
+  background:#f2ebe5;
+  padding:10px 6px;
+}
+
+.cat{
+  background:#fff;
+  border-radius:12px;
+  padding:8px;
+  margin-bottom:10px;
+  font-size:11px;
+  text-align:center;
+}
+
+/* MENU LIST */
+.menu{
+  flex:1;
+  padding:12px;
+}
+
+/* PRODUCT CARD */
+.item{
+  background:#fff;
+  border-radius:14px;
+  padding:12px;
+  display:flex;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.item img{
+  width:80px;
+  height:120px;
+  object-fit:contain;
+}
+
+.details{
+  flex:1;
+}
+
+.details h4{
+  font-size:15px;
+  margin-bottom:6px;
+}
+
+.details p{
+  font-size:13px;
+  color:#666;
+  margin-bottom:10px;
+}
+
+/* ADD BUTTON */
+.add-btn{
+  align-self:flex-end;
+  border:1px solid #7a3a1d;
+  color:#7a3a1d;
+  background:#fff;
+  border-radius:20px;
+  padding:6px 14px;
+  font-weight:600;
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="header">OUR MENU</div>
+
+<div class="wrapper">
+
+  <!-- CATEGORIES -->
+  <div class="categories">
+    <div class="cat">Combos</div>
+    <div class="cat">Beverages</div>
+    <div class="cat">BK Café</div>
+    <div class="cat">New</div>
+  </div>
+
+  <!-- MENU -->
+  <div class="menu" id="menu"></div>
+
+</div>
+
+<script>
+const products = [
+  {
+    name:"Chocolate Cold Coffee",
+    kcal:"328 Kcal",
+    img:"https://media.istockphoto.com/id/1291175021/photo/chocolate-milkshake.jpg?s=612x612&w=0&k=20&c=LkPVfYUcIdM85m9FI6QrAjXyzvOxrdhBEkmcPmlbTYw="
+  },
+  {
+    name:"Classic Iced Coffee",
+    kcal:"141.9 Kcal",
+    img:"https://media.istockphoto.com/id/2244784042/photo/aerial-view-of-cappuccino-with-floral-latte-art-on-wooden-table.jpg?s=612x612&w=0&k=20&c=9kVeLr55WUlBHX_l7nrHZNqyyG7og3Vv4omtqeh_oG0="
+  },
+  {
+    name:"Coffee Frappe",
+    kcal:"215 Kcal",
+    img:"https://images.unsplash.com/photo-1657657365750-38e5b953b2fa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8JTIyQ29mZmVlJTIwRnJhcHBlJTIwc3RhcmJ1Y2tzfGVufDB8fDB8fHww"
+  }
+];
+
+document.getElementById("menu").innerHTML =
+products.map(p=>`
+  <div class="item">
+    <img src="${p.img}">
+    <div class="details">
+      <h4>${p.name}</h4>
+      <p>${p.kcal}</p>
+      <button class="add-btn">ADD +</button>
+    </div>
+  </div>
+`).join("");
+</script>
+
+</body>
+</html>
+

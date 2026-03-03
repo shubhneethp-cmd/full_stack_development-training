@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Algo Trading Bot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Algo Trading Bot Simulation</h1>
+   <h3>Balance=1000</h3>
+  <h3>Stock Price=100</h3>
+  <h3>Holdings=0</h3>
+
+  <button onclick="runBot()">Run Simulation</button>
+
+  <pre id="output"></pre>
+ 
+
+  <script>
+    // Initial setup
+    let balance = 1000;
+    let stockPrice = 100;
+    let holdings = 0;
+    let output = document.getElementById("output");
+
+    // Update stock price (80 - 120)
+    function updatePrice() {
+      stockPrice = Math.floor(Math.random() * 41) + 80;
+      return stockPrice;
+    }
+
+    // Decide action WITHOUT if/else
+    function decideAction(price) {
+      return (price < 90 && balance >= price) ? "BUY" :
+             (price > 110 && holdings > 0) ? "SELL" :
+             "HOLD";
+    }
+
+    // Execute trade WITHOUT if/else
+    function trade(action) {
+      balance = action === "BUY" ? balance - stockPrice : balance;
+      holdings = action === "BUY" ? holdings + 1 : holdings;
+
+      balance = action === "SELL" ? balance + stockPrice : balance;
+      holdings = action === "SELL" ? holdings - 1 : holdings;
+    }
+
+    // Run simulation
+    function runBot() {
+      output.textContent = "";
+      balance = 1000;
+      holdings = 0;
+
+      for (let round = 1; round <= 10; round++) {
+        let price = updatePrice();
+        let action = decideAction(price);
+        trade(action);
+
+        output.textContent += 
+          Round ${round}: Stock Price = ${price} → Action = ${action} → Balance = ${balance}, Holdings = ${holdings}\n;
+      }
+    }
+  </script>
+
+</body>
+</html>
