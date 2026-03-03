@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Reservation System</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f4f4; }
+        .container { background: white; padding: 20px; border-radius: 8px; shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        pre { background: #272822; color: #f8f8f2; padding: 15px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Railway Reservation System</h1>
+        <p>Check the <strong>Browser Console (F12)</strong> for detailed logs, or see the summary below:</p>
+        
+        <div id="output">
+            </div>
+    </div>
+
+    <script>
+        // --- Initial Data ---
+        let names = ['Alice', 'Bob', 'Charlie', 'Daisy'];
+        let ages = [25, 65, 17, 72];
+        let seats = [12, 13, 14, 15];
+        let genders = ['F', 'M', 'M', 'F'];
+
+        const outputDiv = document.getElementById('output');
+
+        // Helper function to display results on the page
+        function display(title, content) {
+            outputDiv.innerHTML += `<h2>${title}</h2><p>${content}</p>`;
+        }
+
+        // 1. Passenger List
+        let listHTML = "";
+        names.forEach((name, i) => {
+            listHTML += `Passenger: ${name} | Age: ${ages[i]} | Seat: ${seats[i]} | Gender: ${genders[i]}<br>`;
+        });
+        display("1. Passenger List", listHTML);
+
+        // 2. Senior Citizens (60+)
+        const seniors = names.filter((_, i) => ages[i] >= 60);
+        display("2. Senior Citizens", seniors.join(", "));
+
+        // 3. Uppercase Names
+        names = names.map(name => name.toUpperCase());
+        display("3. Names in Uppercase", names.join(", "));
+
+        // 4. Total Age (Reduce)
+        const totalAge = ages.reduce((sum, age) => sum + age, 0);
+        display("4. Total Age", totalAge);
+
+        // 5. Total Age in Reverse (ReduceRight)
+        const totalAgeReverse = ages.reduceRight((sum, age) => sum + age, 0);
+        display("5. Total Age (ReduceRight)", totalAgeReverse);
+
+        // 6. Check Adults
+        const allAdults = ages.every(age => age >= 18);
+        display("6. All Passengers Adults?", allAdults);
+
+        // 7. Check Minors
+        const hasMinor = ages.some(age => age < 18);
+        display("7. Any Minors Present?", hasMinor);
+
+        // 8. Convert Seat Numbers (Array.from)
+        const seatString = '12,13,14,15';
+        const seatArray = Array.from(seatString.split(','), Number);
+        display("8. Converted Seats", `[${seatArray.join(", ")}] (Type: ${typeof seatArray[0]})`);
+
+        // 9. Add Extra Passengers (Spread)
+        const extra = ['Rahul', 'Sita'];
+        names = [...names, ...extra];
+        display("9. Updated Names (Spread)", names.join(", "));
+
+        // 10. Separate First Passenger (Rest)
+        const [firstPassenger, ...remaining] = names;
+        display("10. Rest Operator", `<strong>First:</strong> ${firstPassenger} <br> <strong>Others:</strong> ${remaining.join(", ")}`);
+
+        // Log to console as well for debugging
+        console.log("System Processed Successfully.");
+    </script>
+</body>
+</html>

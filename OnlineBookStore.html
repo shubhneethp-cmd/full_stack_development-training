@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Bookstore Array Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .method {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .books {
+            margin-top: 8px;
+            color: #111827;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📚 Online Bookstore Management</h1>
+
+<div id="output"></div>
+
+<script>
+
+let output = document.getElementById("output");
+
+function show(title, description, arrayData) {
+    output.innerHTML += `
+        <div class="card">
+            <div class="method">${title}</div>
+            <div>${description}</div>
+            <div class="books">Current Books: ${JSON.stringify(arrayData)}</div>
+        </div>
+    `;
+}
+
+// 1️⃣ Initial Array
+let books = ['Math', 'Science', 'English'];
+show("1. Initial Array",
+     "Starting with default books.",
+     books);
+
+// 2️⃣ push() and unshift()
+books.push("History");
+show("2. push()",
+     "Added 'History' at the end using push().",
+     books);
+
+books.unshift("Computer");
+show("2. unshift()",
+     "Added 'Computer' at the beginning using unshift().",
+     books);
+
+// 3️⃣ pop() and shift()
+books.pop();
+show("3. pop()",
+     "Removed last book using pop().",
+     books);
+
+books.shift();
+show("3. shift()",
+     "Removed first book using shift().",
+     books);
+
+// 4️⃣ splice()
+books.splice(1, 1);
+show("4. splice()",
+     "Removed 1 book from index 1 using splice().",
+     books);
+
+// 5️⃣ concat()
+let newArrivals = ['Geography', 'Physics'];
+books = books.concat(newArrivals);
+show("5. concat()",
+     "Merged new arrivals using concat().",
+     books);
+
+// 6️⃣ copyWithin()
+books.copyWithin(0, 2);
+show("6. copyWithin()",
+     "Copied part of array within itself using copyWithin(0,2).",
+     books);
+
+// 7️⃣ flat()
+let categories = ['Fiction', ['Horror', 'Comedy'], 'Biography'];
+let flatCategories = categories.flat();
+show("7. flat()",
+     "Flattened nested categories using flat().",
+     flatCategories);
+
+// 8️⃣ slice()
+let section = books.slice(0, 2);
+show("8. slice()",
+     "Created small display section using slice(0,2).",
+     section);
+
+// 9️⃣ toString() & join()
+show("9. toString()",
+     "Converted array to string using toString().",
+     books.toString());
+
+show("9. join()",
+     "Converted array to string using join(' | ').",
+     books.join(" | "));
+
+// 🔟 length
+show("10. length",
+     "Total number of books in array.",
+     books.length);
+
+// 1️⃣1️⃣ Update by index
+books[0] = "Updated Book";
+show("11. Update by Index",
+     "Replaced first book by directly changing index.",
+     books);
+
+// 1️⃣2️⃣ forEach()
+let list = "";
+books.forEach((book, index) => {
+    list += `Position ${index} → ${book}<br>`;
+});
+show("12. forEach()",
+     "Displayed all books with positions.",
+     list);
+
+</script>
+
+</body>
+</html>

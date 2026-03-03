@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shopping Cart •</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --danger: #dc2626;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --dark: #0f172a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.5;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    #search {
+      width: 100%;
+      max-width: 500px;
+      padding: 12px 16px;
+      font-size: 1rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    #search:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      overflow: hidden;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    }
+
+    .card.premium {
+      border: 1px solid #c026d3;
+      box-shadow: 0 0 15px rgba(192,38,211,0.25);
+    }
+
+    .card-content {
+      padding: 1.25rem;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .add-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .add-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .cart-section {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+      margin-top: 2rem;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 2fr 1fr 120px 40px;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #e2e8f0;
+      align-items: center;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-name {
+      font-weight: 600;
+    }
+
+    .item-price {
+      color: var(--gray);
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #cbd5e1;
+      background: #f1f5f9;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .qty-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .qty-display {
+      width: 40px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .remove-btn {
+      background: #fee2e2;
+      color: var(--danger);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .remove-btn:hover {
+      background: #fecaca;
+    }
+
+    .cart-summary {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid #e2e8f0;
+      font-size: 1.1rem;
+    }
+
+    .total-line {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem 0;
+    }
+
+    .grand-total {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .empty-cart {
+      text-align: center;
+      color: var(--gray);
+      padding: 3rem 1rem;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 600px) {
+      .cart-item {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+        text-align: center;
+      }
+      .quantity-controls {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Tech Shop</h1>
+    <input type="text" id="search" placeholder="Search products (e.g. laptop, airpods)...">
+  </header>
+
+  <section class="products" id="products"></section>
+
+  <section class="cart-section">
+    <div class="cart-header">
+      <h2>Shopping Cart</h2>
+      <span id="cart-count">0 items</span>
+    </div>
+
+    <div id="cart-items"></div>
+
+    <div class="cart-summary" id="cart-summary">
+      <div class="total-line">
+        <span>Items:</span>
+        <span id="total-items">0</span>
+      </div>
+      <div class="total-line grand-total">
+        <span>Total:</span>
+        <span id="total-price">$0.00</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+// Data
+const products = [
+  { id: 1, name: "MacBook Pro 16″ M4 Pro",     price: 2499 },
+  { id: 2, name: "iPhone 16 Pro Max",           price: 1199 },
+  { id: 3, name: "Samsung Galaxy S25 Ultra",    price: 1299 },
+  { id: 4, name: "Sony WH-1000XM5",             price: 399  },
+  { id: 5, name: "AirPods Max",                 price: 549  },
+  { id: 6, name: "Dell XPS 13 (2025)",          price: 1399 },
+  { id: 7, name: "Logitech MX Master 3S",       price: 99   },
+  { id: 8, name: "ASUS ROG Zephyrus G16",       price: 2299 },
+  { id: 9, name: "Anker PowerCore 26800",       price: 69   },
+  { id:10, name: "Samsung Odyssey OLED G9",     price: 1499 }
+];
+
+// State
+let cart = [];
+
+// DOM elements
+const productsContainer = document.getElementById('products');
+const cartItemsContainer  = document.getElementById('cart-items');
+const totalItemsEl        = document.getElementById('total-items');
+const totalPriceEl        = document.getElementById('total-price');
+const cartCountEl         = document.getElementById('cart-count');
+const searchInput         = document.getElementById('search');
+
+// Core Functions
+function renderProducts(filteredProducts = products) {
+  productsContainer.innerHTML = filteredProducts.map(product => `
+    <div class="card ${product.price > 1000 ? 'premium' : ''}">
+      <div class="card-content">
+        <h3>${product.name}</h3>
+        <div class="price">$${product.price.toLocaleString()}</div>
+        <button 
+          class="add-btn" 
+          onclick="addToCart(${product.id})"
+        >Add to Cart</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addToCart(productId) {
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+
+  const existing = cart.find(item => item.id === productId);
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
+
+  renderCart();
+  calculateTotal();
+}
+
+function removeFromCart(productId) {
+  cart = cart.filter(item => item.id !== productId);
+  renderCart();
+  calculateTotal();
+}
+
+function updateQuantity(productId, change) {
+  const item = cart.find(i => i.id === productId);
+  if (!item) return;
+
+  item.quantity = Math.max(1, item.quantity + change);
+
+  renderCart();
+  calculateTotal();
+}
+
+function calculateTotal() {
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  totalItemsEl.textContent = totalItems;
+  totalPriceEl.textContent = `$${totalPrice.toLocaleString(undefined, {minimumFractionDigits:2})}`;
+  cartCountEl.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
+}
+
+function renderCart() {
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = `
+      <div class="empty-cart">Your cart is empty</div>
+    `;
+    return;
+  }
+
+  cartItemsContainer.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="item-name">${item.name}</div>
+      <div class="item-price">$${item.price}</div>
+      
+      <div class="quantity-controls">
+        <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
+        <span class="qty-display">${item.quantity}</span>
+        <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+      </div>
+      
+      <button class="remove-btn" onclick="removeFromCart(${item.id})">×</button>
+    </div>
+  `).join('');
+}
+
+// Search (live filter)
+searchInput.addEventListener('input', (e) => {
+  const term = e.target.value.toLowerCase().trim();
+  
+  const filtered = products.filter(p => 
+    p.name.toLowerCase().includes(term)
+  );
+
+  renderProducts(filtered);
+});
+
+// Initial render
+renderProducts();
+renderCart();
+calculateTotal();
+</script>
+</body>
+</html>
+
+<!-- Replace the current <header> with something like this -->
+
+<header class="hero">
+  <div class="hero-content">
+    <h1>TechGear Hub</h1>
+    <p>Find the latest smartphones, laptops, audio gear & accessories</p>
+    <div class="quick-categories">
+
+      <a href="#laptops"    class="category-chip">Laptops</a>,
+
+      <a href="#phones"     class="category-chip">Smartphones</a>,
+
+      <a href="#audio"      class="category-chip">Headphones</a>,
+
+      <a href="#accessories"class="category-chip">Accessories</a>,
+
+      <a href="#cart-section" class="category-chip cart-link">🛒 Cart</a>
+    </div>
+  </div>
+</header>
+
+<!-- then somewhere near the top of .products add id's or filter buttons -->
+<section class="products" id="products">
+  <!-- existing content -->
+</section>
+
+<section class="cart-section" id="cart-section">
+  <!-- existing cart -->
+</section>
+
+

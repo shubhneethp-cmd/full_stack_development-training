@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>School Result Analyzer - Excel Type</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #f4f6f9;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background: white;
+    }
+
+    th, td {
+        border: 1px solid #999;
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background: #2a5298;
+        color: white;
+    }
+
+    input, button {
+        padding: 8px;
+        margin: 5px;
+    }
+
+    .controls {
+        text-align: center;
+    }
+
+    .result-table {
+        margin-top: 30px;
+    }
+</style>
+</head>
+<body>
+
+<h1>📊 School Result Analyzer (Excel View)</h1>
+
+<!-- Student Table -->
+<table>
+    <tr>
+        <th>Index</th>
+        <th>Student Name</th>
+        <th>Marks</th>
+    </tr>
+    <tbody id="studentTable"></tbody>
+</table>
+
+<div class="controls">
+    <input type="text" id="searchName" placeholder="Enter Student Name">
+    <button onclick="analyze()">Analyze</button>
+</div>
+
+<!-- Result Table -->
+<table class="result-table">
+    <tr>
+        <th>Method</th>
+        <th>Result</th>
+    </tr>
+    <tbody id="resultTable"></tbody>
+</table>
+
+<script>
+
+// Array of Objects
+const students = [
+    { name: "Rahul", marks: 25 },
+    { name: "Priya", marks: 35 },
+    { name: "Aman", marks: 45 },
+    { name: "Rahul", marks: 60 },
+    { name: "Neha", marks: 75 }
+];
+
+// Display students in Excel style
+function loadStudents() {
+    const table = document.getElementById("studentTable");
+    students.forEach((student, index) => {
+        table.innerHTML += `
+            <tr>
+                <td>${index}</td>
+                <td>${student.name}</td>
+                <td>${student.marks}</td>
+            </tr>
+        `;
+    });
+}
+
+loadStudents();
+
+function addResult(method, result) {
+    document.getElementById("resultTable").innerHTML += `
+        <tr>
+            <td>${method}</td>
+            <td>${result}</td>
+        </tr>
+    `;
+}
+
+function analyze() {
+
+    document.getElementById("resultTable").innerHTML = "";
+    const name = document.getElementById("searchName").value;
+
+    const namesArray = students.map(s => s.name);
+
+    // indexOf
+    const firstIndex = namesArray.indexOf(name);
+    addResult("indexOf()",
+        firstIndex !== -1 ? 
+        `First ${name} → Index ${firstIndex}, Marks ${students[firstIndex].marks}` :
+        "Not Found");
+
+    // lastIndexOf
+    const lastIndex = namesArray.lastIndexOf(name);
+    addResult("lastIndexOf()",
+        lastIndex !== -1 ? 
+        `Last ${name} → Index ${lastIndex}, Marks ${students[lastIndex].marks}` :
+        "Not Found");
+
+    // includes
+    addResult("includes()",
+        `${name} Enrolled → ${namesArray.includes(name)}`);
+
+    // find
+    const firstPass = students.find(s => s.marks > 40);
+    addResult("find()",
+        `First Passing → ${firstPass.name} (${firstPass.marks})`);
+
+    // findIndex
+    const firstPassIndex = students.findIndex(s => s.marks > 40);
+    addResult("findIndex()",
+        `First Passing Index → ${firstPassIndex}`);
+
+    // findLast
+    const lastAbove50 = students.findLast(s => s.marks > 50);
+    addResult("findLast()",
+        `Last Above 50 → ${lastAbove50.name} (${lastAbove50.marks})`);
+
+    // findLastIndex
+    const lastPassIndex = students.findLastIndex(s => s.marks > 40);
+    addResult("findLastIndex()",
+        `Last Passing Index → ${lastPassIndex}`);
+}
+
+</script>
+
+</body>
+</html>
